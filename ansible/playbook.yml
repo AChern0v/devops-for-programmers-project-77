@@ -1,0 +1,23 @@
+- name: Install docker and its dependencies
+  ansible.builtin.import_playbook: install_docker.yml
+  tags: [setup]
+
+- name: Main playbook
+  hosts: all
+  tasks:
+    - name: Start graphana image
+      community.docker.docker_container:
+        name: grafana-app
+        image: grafana/grafana:8.2.6
+        restart_policy: always
+        exposed_ports: 3000
+        ports:
+          - 3000:3000
+      tags: [graphana, deploy]
+
+- hosts: webservers
+  tasks:
+    - name: Install datadog
+      ansible.builtin.import_role:
+        name: datadog.datadog
+      tags: [monitoring, datadog]

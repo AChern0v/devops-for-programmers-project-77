@@ -1,0 +1,11 @@
+datadog_site: "datadoghq.eu"
+datadog_checks:
+  http_check:
+    init_config:
+    instances:
+      - name: grafana_status
+        url: terraform-sandbox.tk
+        timeout: 5
+        method: GET
+
+datadog_api_key: "{{ vault_datadog_api_key }}"
