@@ -1,6 +1,5 @@
-resource "digitalocean_ssh_key" "evo_laptop_terraform" {
-  name       = "evo_laptop_terraform_key"
-  public_key = file("~/.ssh/terraform_digitalocean.pub")
+data "digitalocean_ssh_key" "evo-laptop" {
+  name = "evo-laptop"
 }
 
 resource "digitalocean_droplet" "app1" {
@@ -8,7 +7,7 @@ resource "digitalocean_droplet" "app1" {
   name   = "app-1"
   region = "sfo3"
   size   = "s-1vcpu-1gb"
-  ssh_keys = [digitalocean_ssh_key.evo_laptop_terraform.fingerprint]
+  ssh_keys = [data.digitalocean_ssh_key.evo-laptop.id]
 }
 
 resource "digitalocean_droplet" "app2" {
@@ -16,7 +15,7 @@ resource "digitalocean_droplet" "app2" {
   name   = "app-2"
   region = "sfo3"
   size   = "s-1vcpu-1gb"
-  ssh_keys = [digitalocean_ssh_key.evo_laptop_terraform.fingerprint]
+  ssh_keys = [data.digitalocean_ssh_key.evo-laptop.id]
 }
 
 resource "digitalocean_domain" "domain" {
