@@ -3,23 +3,23 @@ data "digitalocean_ssh_key" "evo-laptop" {
 }
 
 resource "digitalocean_droplet" "app1" {
-  image  = "ubuntu-22-04-x64"
-  name   = "app-1"
-  region = "sfo3"
-  size   = "s-1vcpu-1gb"
+  image    = "ubuntu-22-04-x64"
+  name     = "app-1"
+  region   = "sfo3"
+  size     = "s-1vcpu-1gb"
   ssh_keys = [data.digitalocean_ssh_key.evo-laptop.id]
 }
 
 resource "digitalocean_droplet" "app2" {
-  image  = "ubuntu-22-04-x64"
-  name   = "app-2"
-  region = "sfo3"
-  size   = "s-1vcpu-1gb"
+  image    = "ubuntu-22-04-x64"
+  name     = "app-2"
+  region   = "sfo3"
+  size     = "s-1vcpu-1gb"
   ssh_keys = [data.digitalocean_ssh_key.evo-laptop.id]
 }
 
 resource "digitalocean_domain" "domain" {
-  name       = "terraform-sandbox.tk"
+  name = "terraform-sandbox.tk"
 }
 
 resource "digitalocean_record" "record-1" {
