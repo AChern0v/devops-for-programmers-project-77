@@ -1,5 +1,5 @@
 resource "digitalocean_ssh_key" "evo_laptop_terraform" {
-  name       = "Terraform digitaloceal ssh-key"
+  name       = "evo_laptop_terraform_key"
   public_key = file("~/.ssh/terraform_digitalocean.pub")
 }
 
